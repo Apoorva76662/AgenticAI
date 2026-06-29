@@ -1,18 +1,4 @@
-"""Tool functions exposed to the agents.
 
-Two layers:
-  1. Pure logic  -> count_working_days(...)  
-  2. Tool wrappers -> the functions the LLM agents actually call. Each returns
-     a plain dict (ADK serialises it back to the model).
-
-Design notes:
-  * The working-day count is recomputed authoritatively inside persist_leave_request
-    rather than trusting whatever number the model carried in conversation.
-  * get_public_holidays accepts an employee_id OR an explicit country_code. This
-    is what makes the Employee/Calendar fan-out genuinely independent: the
-    calendar branch resolves country itself instead of waiting on the employee
-    branch's output.
-"""
 from __future__ import annotations
 
 from datetime import date, timedelta
@@ -22,7 +8,7 @@ from .database import get_connection, now_iso
 
 
 # --------------------------------------------------------------------------- #
-# Pure logic — the "Leave Calculation Agent" core.                            #
+# The "Leave Calculation Agent" core.                            #
 # --------------------------------------------------------------------------- #
 def count_working_days(start: str, end: str, holiday_dates: list[str]) -> int:
     """Inclusive working days between start and end (YYYY-MM-DD strings),
