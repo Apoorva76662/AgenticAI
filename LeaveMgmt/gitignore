@@ -1,0 +1,21 @@
+# SQLite database (rebuilt from seed)
+leave_agent/leave.db
+*.db
+
+# Secrets
+.env
+leave_agent/.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.python-version
+
+# IDE
+.idea/
+.vscode/
+
+#conda
+/Miniconda3-latest-MacOSX-arm64.sh
+/Miniconda3-latest-MacOSX-x86_64.sh
